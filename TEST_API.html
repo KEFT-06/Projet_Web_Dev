@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test API Connection</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        button { padding: 10px 20px; margin: 5px; }
+        pre { background: #f4f4f4; padding: 10px; border-radius: 5px; }
+        .error { color: red; }
+        .success { color: green; }
+    </style>
+</head>
+<body>
+    <h1>Test API Mon Miam Miam</h1>
+    
+    <h2>Test Connexion</h2>
+    <button onclick="testLogin()">Test Login</button>
+    <div id="loginResult"></div>
+    
+    <h2>Test Inscription</h2>
+    <button onclick="testSignup()">Test Signup</button>
+    <div id="signupResult"></div>
+    
+    <script>
+        const BASE_URL = 'http://localhost:8000';
+        
+        async function testLogin() {
+            const result = document.getElementById('loginResult');
+            result.innerHTML = '<p>Testing...</p>';
+            
+            try {
+                const response = await fetch(`${BASE_URL}/api/auth/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email: 'test@example.com',
+                        password: 'Test123'
+                    })
+                });
+                
+                const data = await response.json();
+                
+                result.innerHTML = `
+                    <p class="${response.ok ? 'success' : 'error'}">
+                        Status: ${response.status} ${response.statusText}
+                    </p>
+                    <pre>${JSON.stringify(data, null, 2)}</pre>
+                `;
+            } catch (error) {
+                result.innerHTML = `<p class="error">Error: ${error.message}</p>`;
+            }
+        }
+        
+        async function testSignup() {
+            const result = document.getElementById('signupResult');
+            result.innerHTML = '<p>Testing...</p>';
+            
+            try {
+                const response = await fetch(`${BASE_URL}/api/auth/register`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        firstName: 'Test',
+                        lastName: 'User',
+                        email: `test${Date.now()}@example.com`,
+                        password: 'Test123@',
+                        phone: '699887766'
+                    })
+                });
+                
+                const data = await response.json();
+                
+                result.innerHTML = `
+                    <p class="${response.ok ? 'success' : 'error'}">
+                        Status: ${response.status} ${response.statusText}
+                    </p>
+                    <pre>${JSON.stringify(data, null, 2)}</pre>
+                `;
+            } catch (error) {
+                result.innerHTML = `<p class="error">Error: ${error.message}</p>`;
+            }
+        }
+    </script>
+</body>
+</html>

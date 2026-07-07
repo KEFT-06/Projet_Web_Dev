@@ -1,0 +1,29 @@
+{
+    "sqltools.connections": [
+        {
+            "ssh": "Disabled",
+            "previewLimit": 50,
+            "server": "postgresql://postgres.pnuahbygvzfpdgjlfaem:[@TestDB_monMM]@aws-1-us-east-2.pooler.supabase.com:5432/postgres",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "database": "postgres",
+            "username": "postgres",
+            "name": "MonMiamMiamDB"
+        },
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "ssh": "Disabled",
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "DB_MMM",
+            "database": "db_mmm",
+            "username": "root",
+            "password": ""
+        }
+    ]
+}

@@ -1,0 +1,2119 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Mon Miam Miam API",
+        "description": "API for Mon Miam Miam application",
+        "contact": {
+            "name": "API Support",
+            "email": "support@example.com"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/auth/register": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Enregistrer un nouvel utilisateur (étudiant)",
+                "description": "Crée un nouvel utilisateur avec le rôle 'student' et retourne un token d'authentification.",
+                "operationId": "c7bb21a0d87049e161b8e4c9b0d909f2",
+                "requestBody": {
+                    "description": "Données de l'utilisateur pour l'inscription",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "password",
+                                    "phone"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "John Doe"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "john.doe@example.com"
+                                    },
+                                    "password": {
+                                        "description": "Doit contenir au moins 8 caractères, une majuscule et un chiffre.",
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "Password123"
+                                    },
+                                    "phone": {
+                                        "type": "string",
+                                        "example": "699887766"
+                                    },
+                                    "location": {
+                                        "type": "string",
+                                        "example": "Cité U, Yaoundé",
+                                        "nullable": true
+                                    },
+                                    "referral_code": {
+                                        "description": "Code de parrainage d'un autre utilisateur.",
+                                        "type": "string",
+                                        "example": "USER_5f8b1a3b...",
+                                        "nullable": true
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Utilisateur enregistré avec succès",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Utilisateur enregistré avec succès"
+                                        },
+                                        "user": {
+                                            "$ref": "#/components/schemas/User"
+                                        },
+                                        "token": {
+                                            "type": "string",
+                                            "example": "1|abcdef123456"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Erreur de validation"
+                    }
+                }
+            }
+        },
+        "/api/auth/login": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Connecter un utilisateur",
+                "description": "Authentifie un utilisateur avec son email et mot de passe, et retourne un token.",
+                "operationId": "dd51a484b7fa0f97c7680fdbde14cf5f",
+                "requestBody": {
+                    "description": "Identifiants de l'utilisateur",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "john.doe@example.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "Password123"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Connexion réussie",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Connexion réussie"
+                                        },
+                                        "user": {
+                                            "$ref": "#/components/schemas/User"
+                                        },
+                                        "token": {
+                                            "type": "string",
+                                            "example": "2|abcdef123456"
+                                        },
+                                        "roles": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "example": [
+                                                "student"
+                                            ]
+                                        },
+                                        "permissions": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object"
+                                            },
+                                            "example": []
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Identifiants incorrects"
+                    }
+                }
+            }
+        },
+        "/api/auth/logout": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Déconnecter l'utilisateur",
+                "description": "Invalide le token d'authentification actuel de l'utilisateur.",
+                "operationId": "df9bdc6c7a6d9f20b983526b2ec0f698",
+                "responses": {
+                    "200": {
+                        "description": "Déconnexion réussie",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Déconnexion réussie"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/auth/me": {
+            "get": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Obtenir les informations de l'utilisateur authentifié",
+                "operationId": "b5de204f5e452ef51327c691aa99e77c",
+                "responses": {
+                    "200": {
+                        "description": "Informations de l'utilisateur",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/complaints": {
+            "get": {
+                "tags": [
+                    "Complaints"
+                ],
+                "summary": "Lister les réclamations (pour le personnel)",
+                "description": "Retourne une liste paginée des réclamations. Accessible par les employés, managers et admins.",
+                "operationId": "c896b092927624ef9ad25851388b1a78",
+                "parameters": [
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "Filtrer par statut (pending, in_progress, resolved, rejected)",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Liste des réclamations"
+                    },
+                    "403": {
+                        "description": "Accès refusé"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Complaints"
+                ],
+                "summary": "Créer une nouvelle réclamation (étudiant)",
+                "operationId": "ccdda53fcb7c24fba177380d20aa10d4",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "order_id",
+                                    "description"
+                                ],
+                                "properties": {
+                                    "order_id": {
+                                        "description": "ID de la commande concernée",
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "description": {
+                                        "description": "Description détaillée de la réclamation",
+                                        "type": "string",
+                                        "example": "Le plat était froid."
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Réclamation créée avec succès"
+                    },
+                    "403": {
+                        "description": "Accès refusé"
+                    },
+                    "422": {
+                        "description": "Erreur de validation"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/complaints/my": {
+            "get": {
+                "tags": [
+                    "Complaints"
+                ],
+                "summary": "Lister mes réclamations (étudiant)",
+                "description": "Retourne la liste paginée des réclamations de l'utilisateur authentifié.",
+                "operationId": "be8e1c210d10eb9c4218e8cdc2172259",
+                "responses": {
+                    "200": {
+                        "description": "Liste de mes réclamations"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/complaints/{complaint}": {
+            "get": {
+                "tags": [
+                    "Complaints"
+                ],
+                "summary": "Afficher les détails d'une réclamation",
+                "operationId": "5ba6f8b1fd1233f80f645efc71a5cfc5",
+                "parameters": [
+                    {
+                        "name": "complaint",
+                        "in": "path",
+                        "description": "ID de la réclamation",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Détails de la réclamation"
+                    },
+                    "403": {
+                        "description": "Accès refusé"
+                    },
+                    "404": {
+                        "description": "Réclamation non trouvée"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/complaints/{complaint}/respond": {
+            "post": {
+                "tags": [
+                    "Complaints"
+                ],
+                "summary": "Répondre à une réclamation (employé/manager)",
+                "operationId": "2e3ec68a0abcd9c89adcbd17e6818183",
+                "parameters": [
+                    {
+                        "name": "complaint",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "response"
+                                ],
+                                "properties": {
+                                    "response": {
+                                        "description": "Réponse de l'employé",
+                                        "type": "string",
+                                        "example": "Nous sommes désolés pour ce désagrément."
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Réponse enregistrée"
+                    },
+                    "403": {
+                        "description": "Accès refusé"
+                    },
+                    "422": {
+                        "description": "Erreur de validation"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/complaints/{complaint}/resolve": {
+            "patch": {
+                "tags": [
+                    "Complaints"
+                ],
+                "summary": "Résoudre ou rejeter une réclamation (admin/manager)",
+                "operationId": "8d51b4e3baf1b39e4e5456117b22bdd0",
+                "parameters": [
+                    {
+                        "name": "complaint",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "status"
+                                ],
+                                "properties": {
+                                    "status": {
+                                        "description": "Nouveau statut",
+                                        "type": "string",
+                                        "enum": [
+                                            "resolved",
+                                            "rejected"
+                                        ]
+                                    },
+                                    "response": {
+                                        "description": "Réponse finale (optionnelle si déjà présente)",
+                                        "type": "string",
+                                        "example": "La réclamation a été traitée."
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Réclamation mise à jour"
+                    },
+                    "403": {
+                        "description": "Accès refusé"
+                    },
+                    "422": {
+                        "description": "Erreur de validation"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/employees": {
+            "get": {
+                "tags": [
+                    "Employees"
+                ],
+                "summary": "Lister les employés",
+                "description": "Retourne une liste paginée des employés. Accessible par les managers et admins.",
+                "operationId": "b9b73e1873c5fe36b951f014f711e4fa",
+                "parameters": [
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "Filtrer par statut (active, inactive)",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "role",
+                        "in": "query",
+                        "description": "Filtrer par rôle (employee, manager)",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "Rechercher par nom, email ou téléphone",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Champ de tri (ex: name, hire_date)",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "order",
+                        "in": "query",
+                        "description": "Ordre de tri (asc, desc)",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Nombre d'éléments par page",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Liste paginée des employés",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Employee"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Accès refusé"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Employees"
+                ],
+                "summary": "Créer un nouvel employé",
+                "description": "Crée un nouvel utilisateur et un profil employé associé. Accessible par les managers (pour créer des employés) et les admins (pour créer employés et managers).",
+                "operationId": "781d9d682a574c5e2c1dab17f782b5cd",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "phone",
+                                    "password",
+                                    "role",
+                                    "position"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "John Doe"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "john.doe@example.com"
+                                    },
+                                    "phone": {
+                                        "type": "string",
+                                        "example": "+237699887766"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "Password123"
+                                    },
+                                    "role": {
+                                        "type": "string",
+                                        "enum": [
+                                            "employee",
+                                            "manager"
+                                        ]
+                                    },
+                                    "position": {
+                                        "type": "string",
+                                        "example": "Serveur"
+                                    },
+                                    "hire_date": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2024-01-15"
+                                    },
+                                    "salary": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 50000
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Employé créé avec succès",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Employee"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Accès refusé"
+                    },
+                    "422": {
+                        "description": "Erreur de validation"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/employees/{employee}": {
+            "get": {
+                "tags": [
+                    "Employees"
+                ],
+                "summary": "Afficher les détails d'un employé",
+                "operationId": "c2a3a0ec2a75e78c2d9e622df0085a77",
+                "parameters": [
+                    {
+                        "name": "employee",
+                        "in": "path",
+                        "description": "ID de l'employé",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Détails de l'employé",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Employee"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Employé non trouvé"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Employees"
+                ],
+                "summary": "Mettre à jour un employé",
+                "operationId": "6e77188ef152be1ee6ec3321fcb02882",
+                "parameters": [
+                    {
+                        "name": "employee",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email"
+                                    },
+                                    "phone": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "description": "Nouveau mot de passe (optionnel)",
+                                        "type": "string",
+                                        "format": "password"
+                                    },
+                                    "position": {
+                                        "type": "string"
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "enum": [
+                                            "active",
+                                            "inactive"
+                                        ]
+                                    },
+                                    "salary": {
+                                        "type": "number",
+                                        "format": "float"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Employé mis à jour",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Employee"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Accès refusé"
+                    },
+                    "422": {
+                        "description": "Erreur de validation"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Employees"
+                ],
+                "summary": "Supprimer un employé (Admin seulement)",
+                "description": "Effectue une suppression logique (soft delete) de l'employé et de son utilisateur associé.",
+                "operationId": "799db2e2d0fe3a7fb4c8dd8adb3484e7",
+                "parameters": [
+                    {
+                        "name": "employee",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Employé supprimé avec succès"
+                    },
+                    "403": {
+                        "description": "Accès refusé"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/employees/{employee}/status": {
+            "patch": {
+                "tags": [
+                    "Employees"
+                ],
+                "summary": "Changer le statut d'un employé",
+                "operationId": "3bcd32b041cc5c70700b1bd9bf228a95",
+                "parameters": [
+                    {
+                        "name": "employee",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "status"
+                                ],
+                                "properties": {
+                                    "status": {
+                                        "type": "string",
+                                        "enum": [
+                                            "active",
+                                            "inactive"
+                                        ]
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Statut modifié avec succès"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/employees/{employee}/role": {
+            "patch": {
+                "tags": [
+                    "Employees"
+                ],
+                "summary": "Changer le rôle d'un employé (Admin seulement)",
+                "operationId": "d1a9a6dd1b019d677355aec1b70ee226",
+                "parameters": [
+                    {
+                        "name": "employee",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "role"
+                                ],
+                                "properties": {
+                                    "role": {
+                                        "type": "string",
+                                        "enum": [
+                                            "employee",
+                                            "manager"
+                                        ]
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Rôle modifié avec succès"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/employees/stats": {
+            "get": {
+                "tags": [
+                    "Employees"
+                ],
+                "summary": "Obtenir les statistiques des employés",
+                "operationId": "f365577f76a317d723e5397431bcb7bb",
+                "responses": {
+                    "200": {
+                        "description": "Statistiques des employés"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/menu-items": {
+            "get": {
+                "tags": [
+                    "Menu"
+                ],
+                "summary": "Lister tous les articles du menu",
+                "description": "Retourne une liste paginée de tous les articles du menu. Peut être filtré par catégorie, disponibilité, etc.",
+                "operationId": "getMenuItems",
+                "parameters": [
+                    {
+                        "name": "category_id",
+                        "in": "query",
+                        "description": "Filtrer par ID de catégorie",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "type",
+                        "in": "query",
+                        "description": "Filtrer par type (ex: déjeuné)",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "Rechercher par nom ou description",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Liste des articles du menu",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/MenuItem"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Menu"
+                ],
+                "summary": "Créer un nouvel article de menu",
+                "description": "Crée un nouvel article. Requiert des permissions d'admin ou de gérant.",
+                "operationId": "createMenuItem",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreMenuItemRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Article créé",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MenuItem"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Accès refusé"
+                    },
+                    "422": {
+                        "description": "Erreur de validation"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/menu-items/{id}": {
+            "get": {
+                "tags": [
+                    "Menu"
+                ],
+                "summary": "Afficher un article de menu",
+                "description": "Retourne les détails d'un article de menu spécifique.",
+                "operationId": "getMenuItemById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de l'article",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Détails de l'article",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MenuItem"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Article non trouvé"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Menu"
+                ],
+                "summary": "Mettre à jour un article de menu",
+                "description": "Met à jour un article existant. Requiert des permissions d'admin ou de gérant.",
+                "operationId": "updateMenuItem",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de l'article",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateMenuItemRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Article mis à jour",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MenuItem"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Accès refusé"
+                    },
+                    "404": {
+                        "description": "Article non trouvé"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Menu"
+                ],
+                "summary": "Supprimer un article de menu",
+                "description": "Supprime (soft delete) un article de menu. Requiert des permissions d'admin ou de gérant.",
+                "operationId": "deleteMenuItem",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de l'article",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Article supprimé"
+                    },
+                    "403": {
+                        "description": "Accès refusé"
+                    },
+                    "404": {
+                        "description": "Article non trouvé"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/orders": {
+            "get": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Display a listing of the resource.",
+                "operationId": "955bb77a45ae173a485fadb8befed93f",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page number",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of orders",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Store a newly created resource in storage.",
+                "operationId": "2123ba58dadb22bd6f2c8081af562230",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "items",
+                                    "delivery_type"
+                                ],
+                                "properties": {
+                                    "items": {
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "menu_item_id": {
+                                                    "type": "integer"
+                                                },
+                                                "quantity": {
+                                                    "type": "integer"
+                                                },
+                                                "price": {
+                                                    "type": "number",
+                                                    "format": "float"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "delivery_type": {
+                                        "type": "string",
+                                        "example": "on_site"
+                                    },
+                                    "delivery_address": {
+                                        "type": "string"
+                                    },
+                                    "delivery_time": {
+                                        "type": "string",
+                                        "format": "date-time"
+                                    },
+                                    "points_to_use": {
+                                        "type": "integer"
+                                    },
+                                    "comment": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Order created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/promotions": {
+            "get": {
+                "tags": [
+                    "Promotions"
+                ],
+                "summary": "Lister les promotions",
+                "description": "Retourne une liste paginée des promotions. Accessible à tous. Peut être filtré.",
+                "operationId": "56baf0b0433a6f76c637521ac79c057d",
+                "parameters": [
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "Filtrer par statut (active, upcoming, expired)",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "Rechercher par titre ou description",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Liste des promotions",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Promotion"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Promotions"
+                ],
+                "summary": "Créer une nouvelle promotion (Admin)",
+                "operationId": "72d75eb4a0d6e3b20312f608356b5859",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "start_date",
+                                    "end_date"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Offre Spéciale Pizza"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Deux pizzas pour le prix d'une !"
+                                    },
+                                    "start_date": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2024-10-01"
+                                    },
+                                    "end_date": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2024-10-15"
+                                    },
+                                    "is_active": {
+                                        "type": "boolean",
+                                        "example": true
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Promotion créée avec succès",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Promotion"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Accès refusé"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/promotions/{promotion}": {
+            "get": {
+                "tags": [
+                    "Promotions"
+                ],
+                "summary": "Afficher les détails d'une promotion",
+                "operationId": "1a01f53cff22e9eb221c27e53e4ae5ff",
+                "parameters": [
+                    {
+                        "name": "promotion",
+                        "in": "path",
+                        "description": "ID de la promotion",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Détails de la promotion",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Promotion"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Promotion non trouvée"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Promotions"
+                ],
+                "summary": "Mettre à jour une promotion (Admin)",
+                "operationId": "2a2f5f53ee654891a59b61424bc663ce",
+                "parameters": [
+                    {
+                        "name": "promotion",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "is_active": {
+                                        "type": "boolean"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Promotion mise à jour",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Promotion"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Promotions"
+                ],
+                "summary": "Supprimer une promotion (Admin)",
+                "operationId": "236901565aea94769d2bfad30c212f50",
+                "parameters": [
+                    {
+                        "name": "promotion",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Promotion supprimée avec succès"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/settings": {
+            "get": {
+                "tags": [
+                    "Settings"
+                ],
+                "summary": "Lister tous les paramètres",
+                "description": "Retourne tous les paramètres de l'application sous forme d'objet clé/valeur. Requiert les droits d'administrateur.",
+                "operationId": "39919ed520029d628c8b91c83fc87e06",
+                "responses": {
+                    "200": {
+                        "description": "Liste des paramètres",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                },
+                                "example": {
+                                    "referral.reward_points": "5",
+                                    "app.name": "Mon Miam Miam"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Accès refusé"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Settings"
+                ],
+                "summary": "Mettre à jour plusieurs paramètres",
+                "description": "Crée ou met à jour un ou plusieurs paramètres. Le corps de la requête doit être un objet où les clés sont les noms des paramètres. Requiert les droits d'administrateur.",
+                "operationId": "5387cb89603507d0535590359d12ef1f",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object"
+                            },
+                            "example": {
+                                "referral.reward_points": "10",
+                                "maintenance_mode": "false"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Paramètres mis à jour"
+                    },
+                    "403": {
+                        "description": "Accès refusé"
+                    },
+                    "422": {
+                        "description": "Erreur de validation"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/settings/{key}": {
+            "get": {
+                "tags": [
+                    "Settings"
+                ],
+                "summary": "Afficher un paramètre spécifique",
+                "description": "Retourne la valeur d'un paramètre spécifique. Requiert les droits d'administrateur.",
+                "operationId": "ecc8523ed8cbb17680d9513540ba48f9",
+                "parameters": [
+                    {
+                        "name": "key",
+                        "in": "path",
+                        "description": "Clé du paramètre (ex: referral.reward_points)",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Détails du paramètre",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Setting"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Paramètre non trouvé"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Settings"
+                ],
+                "summary": "Mettre à jour un paramètre spécifique",
+                "description": "Met à jour la valeur d'un paramètre existant. Requiert les droits d'administrateur.",
+                "operationId": "aa5acb401e1ce140cedaa4334decbd87",
+                "parameters": [
+                    {
+                        "name": "key",
+                        "in": "path",
+                        "description": "Clé du paramètre",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "value"
+                                ],
+                                "properties": {
+                                    "value": {
+                                        "description": "Nouvelle valeur du paramètre",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Paramètre mis à jour"
+                    },
+                    "404": {
+                        "description": "Paramètre non trouvé"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Settings"
+                ],
+                "summary": "Supprimer un paramètre",
+                "description": "Supprime un paramètre de la base de données. Requiert les droits d'administrateur.",
+                "operationId": "790b74c205fa3e81a1cc3e40262ea2ef",
+                "parameters": [
+                    {
+                        "name": "key",
+                        "in": "path",
+                        "description": "Clé du paramètre",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Paramètre supprimé"
+                    },
+                    "404": {
+                        "description": "Paramètre non trouvé"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Employee": {
+                "title": "Employee",
+                "description": "Modèle Employé",
+                "properties": {
+                    "id": {
+                        "description": "ID de l'employé",
+                        "type": "integer"
+                    },
+                    "user": {
+                        "$ref": "#/components/schemas/User"
+                    },
+                    "role": {
+                        "description": "Rôle de l'employé",
+                        "type": "string"
+                    },
+                    "position": {
+                        "description": "Poste de l'employé",
+                        "type": "string"
+                    },
+                    "status": {
+                        "description": "Statut (active/inactive)",
+                        "type": "string"
+                    },
+                    "hire_date": {
+                        "description": "Date d'embauche",
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "tenure_days": {
+                        "description": "Ancienneté en jours",
+                        "type": "integer"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
+            },
+            "Promotion": {
+                "title": "Promotion",
+                "description": "Modèle Promotion",
+                "properties": {
+                    "id": {
+                        "description": "ID de la promotion",
+                        "type": "integer"
+                    },
+                    "title": {
+                        "description": "Titre de la promotion",
+                        "type": "string"
+                    },
+                    "description": {
+                        "description": "Description de la promotion",
+                        "type": "string"
+                    },
+                    "image": {
+                        "description": "URL de l'image de la promotion",
+                        "type": "string"
+                    },
+                    "start_date": {
+                        "description": "Date de début",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "end_date": {
+                        "description": "Date de fin",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "is_active": {
+                        "description": "Statut actif/inactif",
+                        "type": "boolean"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
+            },
+            "StoreMenuItemRequest": {
+                "title": "Store Menu Item Request",
+                "description": "Request body for creating a new menu item",
+                "required": [
+                    "name",
+                    "price",
+                    "type"
+                ],
+                "properties": {
+                    "name": {
+                        "description": "Name of the menu item",
+                        "type": "string",
+                        "maxLength": 255
+                    },
+                    "description": {
+                        "description": "Description of the menu item",
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "price": {
+                        "description": "Price of the menu item",
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "image": {
+                        "description": "URL of the image",
+                        "type": "string",
+                        "format": "url",
+                        "nullable": true
+                    },
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "boisson",
+                            "dessert",
+                            "petit-dejeuné",
+                            "déjeuné"
+                        ]
+                    },
+                    "is_available": {
+                        "description": "Availability of the item",
+                        "type": "boolean",
+                        "default": true
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateMenuItemRequest": {
+                "title": "Update Menu Item Request",
+                "description": "Request body for updating an existing menu item",
+                "properties": {
+                    "name": {
+                        "description": "Name of the menu item",
+                        "type": "string",
+                        "maxLength": 255
+                    },
+                    "description": {
+                        "description": "Description of the menu item",
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "price": {
+                        "description": "Price of the menu item",
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "image": {
+                        "description": "URL of the image",
+                        "type": "string",
+                        "format": "url",
+                        "nullable": true
+                    },
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "boisson",
+                            "dessert",
+                            "petit-dejeuné",
+                            "déjeuné"
+                        ]
+                    },
+                    "is_available": {
+                        "description": "Availability of the item",
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            },
+            "Category": {
+                "title": "Category",
+                "description": "Modèle de catégorie de menu",
+                "properties": {
+                    "id": {
+                        "description": "ID de la catégorie",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "description": "Nom de la catégorie",
+                        "type": "string"
+                    },
+                    "slug": {
+                        "description": "Slug pour l'URL",
+                        "type": "string"
+                    },
+                    "description": {
+                        "description": "Description de la catégorie",
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "order": {
+                        "description": "Ordre d'affichage",
+                        "type": "integer"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
+            },
+            "LoyaltyTransaction": {
+                "title": "Loyalty Transaction",
+                "description": "Modèle de transaction de fidélité",
+                "properties": {
+                    "id": {
+                        "description": "ID de la transaction",
+                        "type": "integer"
+                    },
+                    "user_id": {
+                        "description": "ID de l'utilisateur",
+                        "type": "integer"
+                    },
+                    "order_id": {
+                        "description": "ID de la commande associée",
+                        "type": "integer",
+                        "nullable": true
+                    },
+                    "points": {
+                        "description": "Points gagnés ou dépensés (négatif)",
+                        "type": "integer"
+                    },
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "earned",
+                            "redeemed",
+                            "expired",
+                            "bonus",
+                            "referral"
+                        ]
+                    },
+                    "description": {
+                        "description": "Description de la transaction",
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
+            },
+            "MenuItem": {
+                "title": "MenuItem",
+                "description": "Modèle d'article de menu",
+                "properties": {
+                    "id": {
+                        "description": "ID de l'article",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "description": "Nom de l'article",
+                        "type": "string"
+                    },
+                    "description": {
+                        "description": "Description de l'article",
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "price": {
+                        "description": "Prix de l'article",
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "image": {
+                        "description": "URL de l'image",
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "boisson",
+                            "dessert",
+                            "petit-dejeuné",
+                            "déjeuné"
+                        ]
+                    },
+                    "is_available": {
+                        "description": "Disponibilité de l'article",
+                        "type": "boolean"
+                    },
+                    "popularity_score": {
+                        "description": "Score de popularité",
+                        "type": "integer"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
+            },
+            "Setting": {
+                "title": "Setting",
+                "description": "Modèle de paramètre de l'application",
+                "properties": {
+                    "id": {
+                        "description": "ID du paramètre",
+                        "type": "integer"
+                    },
+                    "key": {
+                        "description": "Clé unique du paramètre (ex: 'referral.reward_points')",
+                        "type": "string"
+                    },
+                    "value": {
+                        "description": "Valeur du paramètre",
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
+            },
+            "User": {
+                "title": "User",
+                "description": "User model",
+                "properties": {
+                    "id": {
+                        "description": "User ID",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "description": "User's name",
+                        "type": "string"
+                    },
+                    "email": {
+                        "description": "User's email",
+                        "type": "string",
+                        "format": "email"
+                    },
+                    "phone": {
+                        "description": "User's phone number",
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "loyalty_points": {
+                        "description": "User's loyalty points",
+                        "type": "integer"
+                    },
+                    "referral_code": {
+                        "description": "User's referral code",
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Authentication",
+            "description": "Endpoints pour l'authentification des utilisateurs (inscription, connexion, déconnexion)"
+        },
+        {
+            "name": "Complaints",
+            "description": "Endpoints pour la gestion des réclamations"
+        },
+        {
+            "name": "Employees",
+            "description": "Endpoints pour la gestion des employés"
+        },
+        {
+            "name": "Menu",
+            "description": "Opérations sur les articles du menu"
+        },
+        {
+            "name": "Orders",
+            "description": "Operations about orders"
+        },
+        {
+            "name": "Promotions",
+            "description": "Endpoints pour la gestion des promotions et événements"
+        },
+        {
+            "name": "Settings",
+            "description": "Gestion des paramètres de l'application (Admin)"
+        }
+    ]
+}

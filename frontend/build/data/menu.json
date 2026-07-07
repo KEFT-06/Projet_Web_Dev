@@ -1,0 +1,495 @@
+{
+  "style_global": {
+    "fond": "#cfbd97",
+    "texte": "#000000",
+    "polices": {
+      "titre": "Poppins Bold",
+      "description": "Raleway Regular"
+    },
+    "format": "1080x1350",
+    "prix_style": {
+      "fond": "#b9a676",
+      "texte": "#000000"
+    }
+  },
+  "entrees": [
+    {
+      "fichier": "entree_accra-de-haricots-yaounde.png",
+      "titre": "Accra de Haricots Yaoundé",
+      "description": "Beignets de haricots noirs épicés, tradition de Yaoundé",
+      "prix": 2000
+    },
+    {
+      "fichier": "entree_plantain-frit-bafoussam.png",
+      "titre": "Plantain Frit Bafoussam",
+      "description": "Plantain mûr frit à la perfection, délice de Bafoussam",
+      "prix": 1800
+    },
+    {
+      "fichier": "entree_samosas-camerounais.png",
+      "titre": "Samosas Camerounais",
+      "description": "Samosas farcis aux légumes et épices locales",
+      "prix": 1700
+    },
+    {
+      "fichier": "entree_soupe-de-pistache-africaine.png",
+      "titre": "Soupe de Pistache Africaine",
+      "description": "Soupe crémeuse aux graines de pistache africaine",
+      "prix": 2000
+    },
+    {
+      "fichier": "entree_salade-de-tomates-yaounde.png",
+      "titre": "Salade de Tomates Yaoundé",
+      "description": "Salade fraîche de tomates locales avec vinaigrette",
+      "prix": 1400
+    },
+    {
+      "fichier": "entree_soupe-de-legumes-traditionnelle.png",
+      "titre": "Soupe de Légumes Traditionnelle",
+      "description": "Soupe chaude aux légumes frais du marché camerounais",
+      "prix": 1800
+    },
+    {
+      "fichier": "entree_beignets-de-poisson.png",
+      "titre": "Beignets de Poisson",
+      "description": "Beignets de poisson frais avec sauce piquante",
+      "prix": 2100
+    },
+    {
+      "fichier": "entree_salade-de-concombre-camerounais.png",
+      "titre": "Salade de Concombre Camerounais",
+      "description": "Salade fraîche de concombre avec vinaigrette légère",
+      "prix": 1300
+    },
+    {
+      "fichier": "entree_beignet-haricot.png",
+      "titre": "Beignets Haricot",
+      "description": "Duo classique : beignets dorés et haricots mijotés, touche d’oignon doux.",
+      "prix": 800
+    },
+    {
+      "fichier": "entree_accra-morue.png",
+      "titre": "Accra de morue ",
+      "description": "Boulettes croustillantes de morue assaisonnées aux épices du Littoral.",
+      "prix": 1000
+    },
+    {
+      "fichier": "entree_verrine-ndole.png",
+      "titre": "Ndolé en verrine",
+      "description": "Mini-verrine de ndolé fondant à la pâte d’arachide et crevette fumée.",
+      "prix": 900
+    },
+    {
+      "fichier": "entree_brochette-crevette.png",
+      "titre": "Brochette de plantain et crevette",
+      "description": "Mignardises grillées caramélisées, alliance sucré-salé parfaite.",
+      "prix": 1100
+    },
+    {
+      "fichier": "entree_chips-macabo.png",
+      "titre": "Chips de macabo",
+      "description": "Fines tranches croustillantes au paprika et sel fin.",
+      "prix": 700
+    },
+    {
+      "fichier": "entree_mini-poisson.png",
+      "titre": "Mini poisson braisé",
+      "description": "Petit poisson fumé épicé et citronné, une explosion de goût.",
+      "prix": 1200
+    },
+    {
+      "fichier": "entree_salade-camerounaise.png",
+      "titre": "Salade camerounaise",
+      "description": "Tomate, oignon, avocat, thon et vinaigrette de banane.",
+      "prix": 800
+    },
+    {
+      "fichier": "entree_koki.png",
+      "titre": "Koki express",
+      "description": "Petit gâteau de haricot jaune, vapeur dans feuille de bananier.",
+      "prix": 900
+    },
+    {
+      "fichier": "entree_puff-poivre.png",
+      "titre": "Puff-Puff ",
+      "description": "Petits beignets parfumés au poivre de Penja.",
+      "prix": 600
+    },
+    {
+      "fichier": "entree_crepe-gari.png",
+      "titre": "Crêpe salée gari-sardine",
+      "description": "La crêpe façon 237 – sardine, gari et épices locales.",
+      "prix": 800
+    },
+    {
+      "fichier": "entree_frites-plantain.png",
+      "titre": "Frites de plantain sucré",
+      "description": "Plantains caramélisés et croustillants à souhait.",
+      "prix": 600
+    },
+    {
+      "fichier": "plat_bouillon-boeuf.png",
+      "titre": "Mini bouillon de bœuf",
+      "description": "Délicieuse soupe épicée pour éveiller les papilles.",
+      "prix": 1000
+    },
+    {
+      "fichier": "entree_soupe-gombo.png",
+      "titre": "Soupe de gombo",
+      "description": "Velouté d’okra frais, relevé au piment doux.",
+      "prix": 900
+    },
+    {
+      "fichier": "entree_crevettes-pili-pili.png",
+      "titre": "Crevettes Pili-Pili",
+      "description": "crevettes grillées au piment pili-pili, saveur authentique",
+      "prix": 2400
+    },
+    {
+      "fichier": "entree_salade-de-fruits-tropicaux.png",
+      "titre": "Salade de Fruits Tropicaux",
+      "description": "mélange de fruits tropicaux frais du Cameroun",
+      "prix": 1500
+    },
+    {
+      "fichier": "entree_akwan-de-mais-douala.png",
+      "titre": "Akwan de Maïs Douala",
+      "description": "boulettes de maïs grillées, spécialité de Douala",
+      "prix": 1600
+    },
+    {
+      "fichier": "entree_beignets-de-manioc-douala.png",
+      "titre": "Beignets de Manioc Douala",
+      "description": "beignets croustillants de manioc, spécialité de Douala",
+      "prix": 1600
+    },
+    {
+      "fichier": "plat_ndole-royal.png",
+      "titre": "Ndolé royal",
+      "description": "feuilles amères, pâte d’arachide, crevettes fumées, plantain mûr.",
+      "prix": 2500
+    }
+  ],
+  "plats": [
+    {
+      "fichier": "plat_poulet-dg-traditionnel.png",
+      "titre": "Poulet DG Traditionnel",
+      "description": "poulet mijoté aux épices et légumes, plat prestigieux",
+      "prix": 5000
+    },
+    {
+      "fichier": "plat_nkui.png",
+      "titre": "Nkui",
+      "description": "spécialité camerounaise aux feuilles de ndolé et arachides",
+      "prix": 3200
+    },
+    {
+      "fichier": "plat_sanga-de-mais-bafang.png",
+      "titre": "Sanga de Maïs Bafang",
+      "description": "boulettes de maïs et d'arachides grillées, spécialité de Bafang",
+      "prix": 2200
+    },
+    {
+      "fichier": "plat_koki-de-haricots-bafia.png",
+      "titre": "Koki de Haricots Bafia",
+      "description": "gâteau de haricots noirs cuit à la vapeur, tradition de Bafia",
+      "prix": 2500
+    },
+    {
+      "fichier": "plat_plantain-pile.png",
+      "titre": "Plantain Pilé",
+      "description": "banane plantain pilée accompagnée de sauce aux arachides",
+      "prix": 3800
+    },
+    {
+      "fichier": "plat_boeuf-saute-aux-epices.png",
+      "titre": "Bœuf Sauté aux Épices",
+      "description": "bœuf sauté aux épices camerounaises et légumes frais",
+      "prix": 4100
+    },
+    {
+      "fichier": "plat_grillades-mixtes-camerounaises.png",
+      "titre": "Grillades Mixtes Camerounaises",
+      "description": "assortiment de viandes grillées aux épices et condiments locaux",
+      "prix": 4800
+    },
+    {
+      "fichier": "plat_couscous-de-mil-rouge.png",
+      "titre": "Couscous de Mil Rouge",
+      "description": "couscous de mil rouge avec légumes et sauce aux arachides",
+      "prix": 3500
+    },
+    {
+      "fichier": "plat_taro.png",
+      "titre": "Taro aux Épinards",
+      "description": "taro cuit avec épinards frais et huile de palme",
+      "prix": 3300
+    },
+    {
+      "fichier": "plat_ragout-de-chevre.png",
+      "titre": "Ragoût de Chèvre",
+      "description": "chèvre mijotée aux légumes et épices traditionnelles",
+      "prix": 3900
+    },
+    {
+      "fichier": "plat_poulet-aux-noix-de-cajou.png",
+      "titre": "Poulet aux Noix de Cajou",
+      "description": "poulet sauté aux noix de cajou et légumes croquants",
+      "prix": 4200
+    },
+    {
+      "fichier": "plat_poisson-aux-legumes-verts.png",
+      "titre": "Poisson aux Légumes Verts",
+      "description": "poisson frais mijoté avec légumes verts et huile de palme",
+      "prix": 4300
+    },
+    {
+      "fichier": "plat_poulet-yassa-traditionnel.png",
+      "titre": "Poulet Yassa Traditionnel",
+      "description": "poulet mariné au citron et oignons, spécialité sénégalo-camerounaise",
+      "prix": 4400
+    },
+    {
+      "fichier": "plat_riz-au-curry-de-crevettes.png",
+      "titre": "Riz au Curry de Crevettes",
+      "description": "riz parfumé au curry avec crevettes fraîches et légumes",
+      "prix": 4600
+    },
+    {
+      "fichier": "plat_agouti-roti-aux-epices.png",
+      "titre": "Agouti Rôti aux Épices",
+      "description": "agouti rôti aux épices traditionnelles avec légumes de saison",
+      "prix": 4700
+    },
+    {
+      "fichier": "plat_couscous-de-mais-aux-legumes.png",
+      "titre": "Couscous de Maïs aux Légumes",
+      "description": "couscous de maïs frais avec légumes mijotés et sauce arachides",
+      "prix": 3600
+    },
+    {
+      "fichier": "plat_poulet-aux-legumes-camerounais.png",
+      "titre": "Poulet aux Légumes Camerounais",
+      "description": "poulet mijoté avec légumes frais du Cameroun et épices locales",
+      "prix": 4000
+    },
+    {
+      "fichier": "plat_riz-aux-legumes-verts.png",
+      "titre": "Riz aux Légumes Verts",
+      "description": "riz parfumé accompagné de légumes verts mijotés",
+      "prix": 3200
+    },
+    {
+      "fichier": "plat_poisson-aux-epices-traditionnelles.png",
+      "titre": "Poisson aux Épices Traditionnelles",
+      "description": "poisson frais cuit aux épices traditionnelles camerounaises",
+      "prix": 4500
+    },
+    {
+      "fichier": "plat_eru-au-poisson-fume.png",
+      "titre": "Eru au Poisson Fumée",
+      "description": "feuilles d'eru mijotées avec poisson fumé et huile de palme",
+      "prix": 4000
+    },
+    {
+      "fichier": "plat_poisson-braise-kribi.png",
+      "titre": "Poisson Braisé Kribi",
+      "description": "poisson frais braisé aux légumes et épices locales",
+      "prix": 4500
+    },
+    {
+      "fichier": "plat_riz-aux-feuilles-de-manioc.png",
+      "titre": "Riz aux Feuilles de Manioc",
+      "description": "riz parfumé mijoté avec feuilles de manioc et huile de palme",
+      "prix": 2800
+    },
+    {
+      "fichier": "plat_brochettes-de-boeuf.png",
+      "titre": "Brochettes de Bœuf",
+      "description": "brochettes de bœuf marinées aux épices camerounaises",
+      "prix": 2300
+    },
+    {
+      "fichier": "plat_eru-traditionnel.png",
+      "titre": "Eru traditionnel",
+      "description": "épinards africains et viande braisée, saveur du Sud-Ouest.",
+      "prix": 2800
+    },
+    {
+      "fichier": "plat_mbongo.png",
+      "titre": "Mbongo tchobi",
+      "description": "poisson noir au charbon d’épices, spécialité du Sanaga.",
+      "prix": 2700
+    },
+    {
+      "fichier": "plat_sauce-jaune.png",
+      "titre": "Sauce jaune",
+      "description": "poulet mijoté dans une sauce dorée et macabo vapeur.",
+      "prix": 2800
+    },
+    {
+      "fichier": "plat_kondre.png",
+      "titre": "Kondré de porc",
+      "description": "plantain et porc braisé longuement dans son jus épicé.",
+      "prix": 3000
+    },
+    {
+      "fichier": "plat_folong.png",
+      "titre": "Folong sauté au poisson fumé",
+      "description": "feuilles vertes sautées à la tomate, poisson et oignons caramélisés.",
+      "prix": 2000
+    },
+    {
+      "fichier": "plat_couscous.png",
+      "titre": "Couscous maïs + gombo",
+      "description": "classique nordique servi chaud et consistant.",
+      "prix": 2200
+    },
+    {
+      "fichier": "plat_riz-saute.png",
+      "titre": "Riz sauté à la camerounaise",
+      "description": "riz poêlé aux crevettes, légumes et œufs brouillés.",
+      "prix": 1800
+    },
+    {
+      "fichier": "plat_okok.png",
+      "titre": "Okok ",
+      "description": "légumes pâte d’arachide et bâton de manioc.",
+      "prix": 2300
+    },
+    {
+      "fichier": "plat_soja.png",
+      "titre": "Soja grillé et plantain",
+      "description": "brochettes de tofu grillé, sauce piment et plantain frit.",
+      "prix": 1500
+    },
+    {
+      "fichier": "plat_poisson.png",
+      "titre": "Poisson braisé complet",
+      "description": "tilapia grillé servi avec banane et sauce tomate maison.",
+      "prix": 3500
+    },
+    {
+      "fichier": "plat_bouillon237.png",
+      "titre": "Bouillon 237",
+      "description": "bouillon de bœuf pimenté, basilic et légumes frais.",
+      "prix": 2500
+    }
+  ],
+  "boissons": [
+    {
+      "fichier": "boisson_jus-de-gingembre-yaounde.png",
+      "titre": "Jus de Gingembre Yaoundé",
+      "description": "jus épicé au gingembre frais et citron, tradition de Yaoundé",
+      "prix": 1200
+    },
+    {
+      "fichier": "boisson_biere-castel-blonde.png",
+      "titre": "Bière Castel Blonde",
+      "description": "bière locale camerounaise blonde, brassée au Cameroun",
+      "prix": 1500
+    },
+    {
+      "fichier": "boisson_jus-de-safou-yaounde.png",
+      "titre": "Jus de Safou Yaoundé",
+      "description": "boisson crémeuse au safou, fruit tropical de Yaoundé",
+      "prix": 900
+    },
+    {
+      "fichier": "boisson_jus-de-mangue-fraiche.png",
+      "titre": "Jus de Mangue Fraîche",
+      "description": "jus de mangue fraîchement pressée, sucrée naturellement",
+      "prix": 1000
+    },
+    {
+      "fichier": "boisson_jus-d-ananas-kribi.png",
+      "titre": "Jus d'Ananas Kribi",
+      "description": "jus d'ananas frais de la région de Kribi",
+      "prix": 1100
+    },
+    {
+      "fichier": "boisson_jus-de-papaye.png",
+      "titre": "Jus de Papaye",
+      "description": "jus rafraîchissant de papaye mûre du Cameroun",
+      "prix": 950
+    },
+    {
+      "fichier": "boisson_jus-de-tamarind.png",
+      "titre": "Jus de Tamarind",
+      "description": "boisson acidulée au tamarind, saveur authentique",
+      "prix": 1050
+    },
+    {
+      "fichier": "boisson_biere-castel-milk-stout.png",
+      "titre": "Bière Castel Milk Stout",
+      "description": "bière brune crémeuse, spécialité camerounaise",
+      "prix": 1500
+    },
+    {
+      "fichier": "boisson_jus-de-fruit-de-la-passion.png",
+      "titre": "Jus de Fruit de la Passion",
+      "description": "jus de fruit de la passion frais et acidulé",
+      "prix": 1300
+    },
+    {
+      "fichier": "boisson_eau-de-coco-naturelle.png",
+      "titre": "Eau de Coco Naturelle",
+      "description": "eau de coco fraîche directement de la noix",
+      "prix": 800
+    },
+    {
+      "fichier": "boisson_jus-d-orange-pressee.png",
+      "titre": "Jus d'Orange Pressée",
+      "description": "jus d'orange fraîchement pressée, vitaminée",
+      "prix": 900
+    },
+    {
+      "fichier": "boisson_the-glace-au-citron.png",
+      "titre": "Thé Glacé au Citron",
+      "description": "thé glacé rafraîchissant au citron frais",
+      "prix": 700
+    },
+    {
+      "fichier": "boisson_cafe-camerounais.png",
+      "titre": "Café Camerounais",
+      "description": "café arabica torréfié local, saveur authentique",
+      "prix": 600
+    },
+    {
+      "fichier": "boisson_jus-de-banane-plantain.png",
+      "titre": "Jus de Banane Plantain",
+      "description": "jus de banane plantain mûre, naturellement sucré",
+      "prix": 850
+    },
+    {
+      "fichier": "boisson_limonade-maison.png",
+      "titre": "Limonade Maison",
+      "description": "limonade fraîche préparée maison avec citron local",
+      "prix": 750
+    },
+    {
+      "fichier": "boisson_infusion-de-menthe.png",
+      "titre": "Infusion de Menthe",
+      "description": "infusion rafraîchissante à la menthe fraîche",
+      "prix": 650
+    },
+    {
+      "fichier": "boisson_jus-de-carotte.png",
+      "titre": "Jus de Carotte",
+      "description": "jus de carotte fraîche, riche en vitamines",
+      "prix": 950
+    },
+    {
+      "fichier": "boisson_smoothie-tropical.png",
+      "titre": "Smoothie Tropical",
+      "description": "mélange de fruits tropicaux frais, banane, mangue et ananas",
+      "prix": 1400
+    },
+    {
+      "fichier": "boisson_jus-de-grenade.png",
+      "titre": "Jus de Grenade",
+      "description": "jus de grenade fraîche, antioxydant naturel",
+      "prix": 1200
+    }
+  ]
+}

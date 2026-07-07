@@ -1,0 +1,105 @@
+{
+  "users": [
+    {
+      "id": "9a439d0b-1270-470c-9a25-5692a75330da",
+      "email": "client@example.com",
+      "password_hash": "$2a$10$s/0n9UZgCDV5RFLELZsYNuhPlD/GTeGLWd/ZxX6iQpoYjIp/Fx6J6",
+      "first_name": "Jean",
+      "last_name": "Dupont",
+      "role": "customer",
+      "phone": null,
+      "created_at": "2025-10-27T18:38:51.270Z"
+    },
+    {
+      "id": "7aa718e7-570a-4845-8782-3ea19796833c",
+      "email": "emp@zeduc.employe.com",
+      "password_hash": "$2a$10$nznfgV8al7CZ8sLGUyT95uZIZXTh977RytzLvf5a3efqDJZPmbdUy",
+      "first_name": "Emma",
+      "last_name": "Mbappe",
+      "role": "employee",
+      "phone": null,
+      "created_at": "2025-10-27T18:38:51.406Z"
+    },
+    {
+      "id": "106858c4-3786-4ac0-b636-01d56359df1b",
+      "email": "keft@etudiant.com",
+      "password_hash": "$2a$10$3kPNLmFhzjsptKxz3xQqwemnXZd6Ng2pYX4n7cU6Zc8Dos4ZMVj/S",
+      "first_name": "keft",
+      "last_name": "foko",
+      "role": "customer",
+      "phone": "686349717",
+      "residence": "residence saint ignace",
+      "room": "105-A",
+      "referral_code": "2A940B1C",
+      "referred_by": null,
+      "loyalty_points": 10,
+      "created_at": "2025-10-27T20:51:21.965Z"
+    },
+    {
+      "id": "1ddce5ff-8a19-4c8d-a446-293b32477ece",
+      "email": "motsegoat@zeduc.manager.com",
+      "password_hash": "$2a$10$3m0FpTgM07Oo4jDwS8f2rODWmL3n/riKbYBUcPRO4dv71dg/.ZxLW",
+      "first_name": "junior",
+      "last_name": "wambo",
+      "role": "customer",
+      "phone": "657349715",
+      "residence": "residence saint ignace",
+      "room": "112-A",
+      "referral_code": "4ED1D82C",
+      "referred_by": null,
+      "loyalty_points": 0,
+      "created_at": "2025-10-27T22:10:24.031Z"
+    },
+    {
+      "id": "483a6517-1324-4ea7-94a0-da3650de5c6a",
+      "email": "mignon@zeduc.admin.com",
+      "password_hash": "$2a$10$Y95.wuLNWsJ9D0H8Uqlhdu2JyyGkw37dtgWvPgB3qAGgzOixGillO",
+      "first_name": "tout",
+      "last_name": "mignon",
+      "role": "customer",
+      "phone": "655070809",
+      "residence": "residence bahamas",
+      "room": "209-10",
+      "referral_code": "58680BD3",
+      "referred_by": null,
+      "loyalty_points": 0,
+      "created_at": "2025-10-28T14:50:12.468Z"
+    }
+  ],
+  "orders": [
+    {
+      "id": "f48fce01-1442-4f9c-a980-34690063d95e",
+      "userId": "106858c4-3786-4ac0-b636-01d56359df1b",
+      "items": [
+        {
+          "id": "auto_main_27",
+          "name": "Poulet DG Traditionnel",
+          "price": 5000,
+          "quantity": 1
+        },
+        {
+          "id": "auto_main_28",
+          "name": "Nkui",
+          "price": 3200,
+          "quantity": 1
+        },
+        {
+          "id": "auto_main_29",
+          "name": "Sanga de Maïs Bafang",
+          "price": 2200,
+          "quantity": 1
+        }
+      ],
+      "subtotal": 10400,
+      "deliveryFee": 500,
+      "discount": 0,
+      "total": 10900,
+      "deliveryMode": "delivery",
+      "arrivalTime": null,
+      "comment": "sans piment , bien de sauce",
+      "status": "pending",
+      "created_at": "2025-10-27T21:03:29.116Z",
+      "paymentStatus": "paid"
+    }
+  ]
+}

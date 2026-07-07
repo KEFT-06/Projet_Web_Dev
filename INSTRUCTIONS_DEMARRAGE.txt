@@ -1,0 +1,126 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                                                                              ║
+║                   🍴 Mon Miam Miam - Instructions de Démarrage               ║
+║                                                                              ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+✨ CONFIGURATION INITIALE (À FAIRE UNE SEULE FOIS)
+
+1. Créer les fichiers .env automatiquement :
+
+   Windows (PowerShell) :
+   .\setup-env.ps1
+
+   Linux/Mac :
+   chmod +x setup-env.sh
+   ./setup-env.sh
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🚀 DÉMARRAGE QUOTIDIEN
+
+1. Lancez le BACKEND dans un terminal :
+
+   Windows :           start-backend.bat
+   Linux/Mac :         ./start-backend.sh
+   
+   ➜ Backend accessible sur : http://localhost:8000
+
+2. Lancez le FRONTEND dans un NOUVEAU terminal :
+
+   Windows :           start-frontend.bat
+   Linux/Mac :         ./start-frontend.sh
+   
+   ➜ Frontend accessible sur : http://localhost:3000
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📚 DOCUMENTATION DISPONIBLE
+
+├─ README_CONNEXION.md                  → Vue d'ensemble de la connexion
+├─ DEMARRAGE_RAPIDE.md                  → Guide de démarrage rapide
+├─ GUIDE_CONNEXION_LARAVEL_REACT.md     → Guide complet et détaillé
+└─ Mon_Miam_Miam/CONFIGURATION_ENV.md   → Détails des variables .env
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🔑 CRÉER UN COMPTE ADMIN
+
+1. Démarrez le backend
+2. Ouvrez un terminal dans Mon_Miam_Miam/
+3. Exécutez : php artisan tinker
+4. Copiez-collez ce code :
+
+$user = App\Models\User::create([
+    'first_name' => 'Admin',
+    'last_name' => 'System',
+    'email' => 'admin@monmiammiam.com',
+    'password' => bcrypt('admin123'),
+    'role' => 'admin'
+]);
+$adminRole = App\Models\Role::where('name', 'admin')->first();
+if ($adminRole) $user->roles()->attach($adminRole->id);
+echo "Admin créé : admin@monmiammiam.com / admin123\n";
+exit
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+⚙️ CONFIGURATION TECHNIQUE
+
+✅ CORS configuré pour accepter les requêtes du frontend
+✅ Sanctum configuré pour l'authentification par token
+✅ Routes API disponibles sur /api/*
+✅ Base de données SQLite prête à l'emploi
+
+Backend :  Mon_Miam_Miam/    (Laravel 12 + Sanctum)
+Frontend : frontend/         (React 18 + TypeScript + Vite)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🧪 TESTER LA CONNEXION
+
+1. Ouvrez http://localhost:8000/api/public dans votre navigateur
+   ➜ Devrait afficher : "Route publique 👋"
+
+2. Ouvrez http://localhost:3000 dans votre navigateur
+   ➜ Devrait afficher l'interface Mon Miam Miam
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+❗ PROBLÈMES COURANTS
+
+❌ "Le fichier .env n'existe pas"
+   → Exécutez setup-env.ps1 (Windows) ou setup-env.sh (Linux/Mac)
+
+❌ "CORS policy error"
+   → Vérifiez que le backend tourne sur http://localhost:8000
+   → Vérifiez Mon_Miam_Miam/.env contient CORS_ALLOWED_ORIGINS
+
+❌ "Connection refused"
+   → Assurez-vous que les deux serveurs sont démarrés
+   → Backend d'abord, puis Frontend
+
+❌ "401 Unauthorized"
+   → Vérifiez que vous êtes connecté
+   → Vérifiez que le token est valide
+   → Reconnectez-vous si nécessaire
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🛠️ COMMANDES UTILES
+
+Backend Laravel :
+  php artisan migrate:fresh --seed    → Réinitialiser la base de données
+  php artisan route:list --path=api   → Voir toutes les routes API
+  php artisan cache:clear             → Vider le cache
+
+Frontend React :
+  npm run build                       → Construire pour la production
+  npm run preview                     → Prévisualiser le build
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✨ Bon développement ! ✨
+
+Pour plus de détails, consultez README_CONNEXION.md
+

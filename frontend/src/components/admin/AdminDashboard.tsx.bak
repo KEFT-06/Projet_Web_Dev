@@ -1,0 +1,436 @@
+import { useState, useEffect } from 'react';import { useState, useEffect } from 'react';import { useState, useEffect } from 'react';
+
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
+
+import { getEmployees, getMenuItems } from '../../lib/storage';import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
+
+import { Users, Tag } from 'lucide-react';
+
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../ui/table';import { getEmployees, getMenuItems } from '../../lib/storage';import { getEmployees, getMenuItems } from '../../lib/storage';
+
+import { Badge } from '../ui/badge';
+
+import { Users, Tag } from 'lucide-react';import { Users, Tag } from 'lucide-react';
+
+import type { User } from '../../lib/mockData';
+
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../ui/table';import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../ui/table';
+
+interface DashboardStats {
+
+  menuItems: number;import { Badge } from '../ui/badge';import { Badge } from '../ui/badge';
+
+  activeEmployees: number;
+
+  activePromotions: number;
+
+  newCustomers: number;
+
+  returningCustomers: number;import type { User } from '../../lib/mockData';import type { User } from '../../lib/mockData';
+
+  salesPercentage: number;
+
+}
+
+
+
+type EmployeeData = {interface DashboardStats {interface DashboardStats {
+
+  id: string;
+
+  firstName: string;  menuItems: number;  menuItems: number;
+
+  lastName: string;
+
+  position: string;  activeEmployees: number;  activeEmployees: number;
+
+  status: string;
+
+};  activePromotions: number;  activePromotions: number;
+
+
+
+export default function AdminDashboard() {  newCustomers: number;  newCustomers: number;
+
+  const [employees, setEmployees] = useState<EmployeeData[]>([]);
+
+  const [stats, setStats] = useState<DashboardStats>({  returningCustomers: number;  returningCustomers: number;
+
+    menuItems: 0,
+
+    activeEmployees: 0,  salesPercentage: number;  salesPercentage: number;
+
+    activePromotions: 0,
+
+    newCustomers: 0,}}
+
+    returningCustomers: 0,
+
+    salesPercentage: 15.5
+
+  });
+
+type EmployeeData = {type EmployeeData = {
+
+  useEffect(() => {
+
+    const loadData = async () => {  id: string;  id: string;
+
+      const empData = await getEmployees() as unknown as User[];
+
+      const menuData = await getMenuItems();  firstName: string;  firstName: string;
+
+
+
+      const employeeData = empData  lastName: string;  lastName: string;
+
+        .filter(user => user.role === 'employee')
+
+        .map(user => ({  position: string;  position: string;
+
+          id: user.id,
+
+          firstName: user.firstName,  status: string;  status: string;
+
+          lastName: user.lastName,
+
+          position: user.position || '',};};
+
+          status: user.status || 'inactive'
+
+        }));
+
+      
+
+      setEmployees(employeeData);export default function AdminDashboard() {export default function AdminDashboard() {
+
+      setStats({
+
+        menuItems: menuData?.length || 0,  const [employees, setEmployees] = useState<EmployeeData[]>([]);  const [employees, setEmployees] = useState<EmployeeData[]>([]);
+
+        activeEmployees: employeeData.filter(emp => emp.status === 'active').length,
+
+        activePromotions: 3,  const [stats, setStats] = useState<DashboardStats>({  const [stats, setStats] = useState<DashboardStats>({
+
+        newCustomers: 120,
+
+        returningCustomers: 480,    menuItems: 0,    menuItems: 0,
+
+        salesPercentage: 15.5
+
+      });    activeEmployees: 0,    activeEmployees: 0,
+
+    };
+
+    activePromotions: 0,    activePromotions: 0,
+
+    loadData();
+
+  }, []);    newCustomers: 0,    newCustomers: 0,
+
+
+
+  return (    returningCustomers: 0,    returningCustomers: 0,
+
+    <div className="flex flex-col gap-6 p-6">
+
+      <h1 className="text-3xl font-bold">Dashboard</h1>    salesPercentage: 15.5    salesPercentage: 15.5
+
+      
+
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">  });  });
+
+        <Card>
+
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+
+            <CardTitle className="text-sm font-medium">Menu Items</CardTitle>
+
+            <Tag className="h-4 w-4 text-muted-foreground" />  useEffect(() => {  useEffect(() => {
+
+          </CardHeader>
+
+          <CardContent>    const loadData = async () => {    const loadData = async () => {
+
+            <div className="text-2xl font-bold">{stats.menuItems}</div>
+
+          </CardContent>      const empData = await getEmployees() as unknown as User[];      const empData = await getEmployees() as unknown as User[];
+
+        </Card>
+
+      const menuData = await getMenuItems();      const menuData = await getMenuItems();
+
+        <Card>
+
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+
+            <CardTitle className="text-sm font-medium">Active Employees</CardTitle>
+
+            <Users className="h-4 w-4 text-muted-foreground" />      const employeeData = empData      const employeeData = empData
+
+          </CardHeader>
+
+          <CardContent>        .filter(user => user.role === 'employee')        .filter(user => user.role === 'employee')
+
+            <div className="text-2xl font-bold">{stats.activeEmployees}</div>
+
+          </CardContent>        .map(user => ({        .map(user => ({
+
+        </Card>
+
+          id: user.id,          id: user.id,
+
+        <Card>
+
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">          firstName: user.firstName,          firstName: user.firstName,
+
+            <CardTitle className="text-sm font-medium">Active Promotions</CardTitle>
+
+            <Tag className="h-4 w-4 text-muted-foreground" />          lastName: user.lastName,          lastName: user.lastName,
+
+          </CardHeader>
+
+          <CardContent>          position: user.position || '',          position: user.position || '',
+
+            <div className="text-2xl font-bold">{stats.activePromotions}</div>
+
+          </CardContent>          status: user.status || 'inactive'          status: user.status || 'inactive'
+
+        </Card>
+
+        }));        }));
+
+        <Card>
+
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">            
+
+            <CardTitle className="text-sm font-medium">Sales Growth</CardTitle>
+
+            <Tag className="h-4 w-4 text-muted-foreground" />      setEmployees(employeeData);      setEmployees(employeeData);
+
+          </CardHeader>
+
+          <CardContent>      setStats({      setStats({
+
+            <div className="text-2xl font-bold">+{stats.salesPercentage}%</div>
+
+          </CardContent>        menuItems: menuData?.length || 0,        menuItems: menuData?.length || 0,
+
+        </Card>
+
+      </div>        activeEmployees: employeeData.filter(emp => emp.status === 'active').length,        activeEmployees: employeeData.filter(emp => emp.status === 'active').length,
+
+
+
+      <Card>        activePromotions: 3,        activePromotions: 3,
+
+        <CardHeader>
+
+          <CardTitle>Recent Employees</CardTitle>        newCustomers: 120,        newCustomers: 120,
+
+        </CardHeader>
+
+        <CardContent>        returningCustomers: 480,        returningCustomers: 480,
+
+          <Table>
+
+            <TableHeader>        salesPercentage: 15.5        salesPercentage: 15.5
+
+              <TableRow>
+
+                <TableHead>Name</TableHead>      });      });
+
+                <TableHead>Position</TableHead>
+
+                <TableHead>Status</TableHead>    };    };
+
+              </TableRow>
+
+            </TableHeader>
+
+            <TableBody>
+
+              {employees.slice(0, 5).map((emp: EmployeeData) => (    loadData();    loadData();
+
+                <TableRow key={emp.id}>
+
+                  <TableCell>  }, []);  }, []);
+
+                    {emp.firstName} {emp.lastName}
+
+                  </TableCell>
+
+                  <TableCell>{emp.position}</TableCell>
+
+                  <TableCell>  return (  return (
+
+                    <Badge variant={emp.status === 'active' ? 'default' : 'secondary'}>
+
+                      {emp.status}    <div className="flex flex-col gap-6 p-6">    <div className="flex flex-col gap-6 p-6">
+
+                    </Badge>
+
+                  </TableCell>      <h1 className="text-3xl font-bold">Dashboard</h1>      <h1 className="text-3xl font-bold">Dashboard</h1>
+
+                </TableRow>
+
+              ))}            
+
+            </TableBody>
+
+          </Table>      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+
+        </CardContent>
+
+      </Card>        <Card>        <Card>
+
+    </div>
+
+  );          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+
+}
+            <CardTitle className="text-sm font-medium">Menu Items</CardTitle>            <CardTitle className="text-sm font-medium">Active Menu Items</CardTitle>
+
+            <Tag className="h-4 w-4 text-muted-foreground" />            <Tag className="h-4 w-4 text-muted-foreground" />
+
+          </CardHeader>          </CardHeader>
+
+          <CardContent>          <CardContent>
+
+            <div className="text-2xl font-bold">{stats.menuItems}</div>            <div className="text-2xl font-bold">{stats.menuItems}</div>
+
+          </CardContent>          </CardContent>
+
+        </Card>        </Card>
+
+
+
+        <Card>        <Card>
+
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+
+            <CardTitle className="text-sm font-medium">Active Employees</CardTitle>            <CardTitle className="text-sm font-medium">Active Employees</CardTitle>
+
+            <Users className="h-4 w-4 text-muted-foreground" />            <Users className="h-4 w-4 text-muted-foreground" />
+
+          </CardHeader>          </CardHeader>
+
+          <CardContent>          <CardContent>
+
+            <div className="text-2xl font-bold">{stats.activeEmployees}</div>            <div className="text-2xl font-bold">{stats.activeEmployees}</div>
+
+          </CardContent>          </CardContent>
+
+        </Card>        </Card>
+
+
+
+        <Card>        <Card>
+
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+
+            <CardTitle className="text-sm font-medium">Active Promotions</CardTitle>            <CardTitle className="text-sm font-medium">Active Promotions</CardTitle>
+
+            <Tag className="h-4 w-4 text-muted-foreground" />            <Tag className="h-4 w-4 text-muted-foreground" />
+
+          </CardHeader>          </CardHeader>
+
+          <CardContent>          <CardContent>
+
+            <div className="text-2xl font-bold">{stats.activePromotions}</div>            <div className="text-2xl font-bold">{stats.activePromotions}</div>
+
+          </CardContent>          </CardContent>
+
+        </Card>        </Card>
+
+
+
+        <Card>        <Card>
+
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+
+            <CardTitle className="text-sm font-medium">Sales Growth</CardTitle>            <CardTitle className="text-sm font-medium">Sales Growth</CardTitle>
+
+            <Tag className="h-4 w-4 text-muted-foreground" />            <Tag className="h-4 w-4 text-muted-foreground" />
+
+          </CardHeader>          </CardHeader>
+
+          <CardContent>          <CardContent>
+
+            <div className="text-2xl font-bold">+{stats.salesPercentage}%</div>            <div className="text-2xl font-bold">+{stats.salesPercentage}%</div>
+
+          </CardContent>          </CardContent>
+
+        </Card>        </Card>
+
+      </div>      </div>
+
+
+
+      <Card>      <Card>
+
+        <CardHeader>        <CardHeader>
+
+          <CardTitle>Recent Employees</CardTitle>          <CardTitle>Recent Employees</CardTitle>
+
+        </CardHeader>        </CardHeader>
+
+        <CardContent>        <CardContent>
+
+          <Table>          <Table>
+
+            <TableHeader>            <TableHeader>
+
+              <TableRow>              <TableRow>
+
+                <TableHead>Name</TableHead>                <TableHead>Name</TableHead>
+
+                <TableHead>Position</TableHead>                <TableHead>Position</TableHead>
+
+                <TableHead>Status</TableHead>                <TableHead>Status</TableHead>
+
+              </TableRow>              </TableRow>
+
+            </TableHeader>            </TableHeader>
+
+            <TableBody>            <TableBody>
+
+              {employees.slice(0, 5).map((emp: EmployeeData) => (              {employees.slice(0, 5).map((emp: EmployeeData) => (
+
+                <TableRow key={emp.id}>                <TableRow key={emp.id}>
+
+                  <TableCell>                  <TableCell>
+
+                    {emp.firstName} {emp.lastName}                    {emp.firstName} {emp.lastName}
+
+                  </TableCell>                  </TableCell>
+
+                  <TableCell>{emp.position}</TableCell>                  <TableCell>{emp.position}</TableCell>
+
+                  <TableCell>                  <TableCell>
+
+                    <Badge variant={emp.status === 'active' ? 'default' : 'secondary'}>                    <Badge variant={emp.status === 'active' ? 'default' : 'secondary'}>
+
+                      {emp.status}                      {emp.status}
+
+                    </Badge>                    </Badge>
+
+                  </TableCell>                  </TableCell>
+
+                </TableRow>                </TableRow>
+
+              ))}              ))}
+
+            </TableBody>            </TableBody>
+
+          </Table>          </Table>
+
+        </CardContent>        </CardContent>
+
+      </Card>      </Card>
+
+    </div>    </div>
+
+  );  );
+
+}}
